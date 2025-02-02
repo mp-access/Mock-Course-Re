@@ -1,9 +1,9 @@
 [[rubrics]]
 id = "R1"
 title = "Mentioned the time complexity of both operations is O(n)"
-points = 1
+points = 0.5
 
 [[rubrics]]
 id = "R2"
 title = "Explained that both are asymptotically equivalent but in practice, reversing characters is slower"
-points = 1
+points = 0.5
