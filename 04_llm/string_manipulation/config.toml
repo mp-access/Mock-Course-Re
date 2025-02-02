@@ -24,7 +24,7 @@ cot = true
 voting = 3
 post = "grading/post.md"
 temperature = 0.2 # Decides the randomness of the gpt model
-model = "gpt" # gpt or claude
+model = "claude" # gpt or claude
 max_points = 1 # Max points for the sub-task that is passed to the model
 
 [files]
