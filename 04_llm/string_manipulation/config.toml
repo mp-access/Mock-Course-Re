@@ -30,7 +30,6 @@ model = "gpt" # gpt or claude
 visible = [
   "task/script.py",
   "task/explanation.md",
-  "task/tests.py",
 ]
 editable = [
   "task/script.py",
