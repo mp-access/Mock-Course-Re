@@ -1,7 +1,7 @@
 [[examples]]
 answer = "Reversing word order and reversing characters both have O(n) complexity, but character reversal requires more operations per word, making it slightly less efficient in practice."
-points = "{ \"R1\": 1, \"R2\": 1 }"
+points = { time_complexity_mentioned = 0.5, asymptotically_equivalent = 0.5 }
 
 [[examples]]
 answer = "Both operations have O(n) complexity because they process each character in the string."
-points = "{ \"R1\": 1, \"R2\": 0 }"
+points = { time_complexity_mentioned = 0.5, asymptotically_equivalent = 0 }
