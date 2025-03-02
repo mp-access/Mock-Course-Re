@@ -4,7 +4,7 @@ slug = "access-mock-course"
 # Path to optional logo for the course. If absent, a generic logo will be shown.
 logo = "python.svg"
 
-# Mandatory. List of directory paths containing the assignments.
+# Mandatory, may be empty. List of directory paths containing the assignments.
 # ACCESS will show assignments in the order in which they are listed here
 # (regardless of dates defined in assignments). Note that assignments are
 # identified by the slug defined in their config.toml, so the directory name
@@ -12,7 +12,16 @@ logo = "python.svg"
 "assignments" = [
   "01_intro",
   "02_basics",
-  "03_classes"
+  "03_classes",
+]
+
+# Mandatory, may be empty. List of directory paths containing lecture examples.
+# ACCESS will show assignments in the order in which they are listed here
+# Note that assignments are
+# identified by the slug defined in their config.toml, so the directory name
+# does not matter and may be changed without affecting ACCESS.
+"examples" = [
+  "examples/power_function",
 ]
 
 # Mandatory. Determines who can see the course in ACCESS at any given time.
