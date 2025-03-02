@@ -22,6 +22,8 @@ logo = "python.svg"
 # does not matter and may be changed without affecting ACCESS.
 "examples" = [
   "examples/power_function",
+  "examples/pass_by_reference",
+  "examples/circle_square_rect",
 ]
 
 # Mandatory. Determines who can see the course in ACCESS at any given time.
