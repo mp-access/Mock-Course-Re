@@ -1,13 +1,6 @@
 slug = "circle-square-rect"
-type = "example"
 
-# compared to regular assignments, lecture examples differ as follows:
-# - test and run are both optional, only grade is compulsory
-# - an additional field type = "example" indicates that this is an example
-
-max_attempts = 1
-refill = 20 # 20 seconds
-max_points = 1
+refill = 7200 # 2 hours
 
 [information.en]
 title = "Circle, Square, Rectangle"
@@ -15,16 +8,19 @@ instructions_file = "instructions_en.md"
 
 [evaluator]
 docker_image = "python:latest"
+# run and test commands are optional but allowed for examples
 run_command = "python task/script.py"
-#test_command = "python -m unittest discover -v task"
+test_command = "python -m unittest discover -v task"
 grade_command = "python -m grading.tests"
 
 [files]
 visible = [
   "task/script.py",
+  "task/tests.py",
 ]
 editable = [
   "task/script.py",
+  "task/tests.py",
 ]
 grading = [
   "grading/tests.py",
