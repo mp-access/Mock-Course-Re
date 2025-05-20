@@ -24,7 +24,7 @@ class GradingTests(AccessTestCase):
 
     def test_x_is_not_literally_42(self):
         self.test_x_is_42()
-        self.hint("The solution seems to contain x = 42, please assign something slighty more complex")
+        self.hint("The solution seems to contain x = 42, please assign something slightly more complex")
         source = inspect.getsource(implementation)
         self.assertTrue("x=42" not in ''.join(source.split()))
 
