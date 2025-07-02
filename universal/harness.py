@@ -5,6 +5,9 @@ from dataclasses import dataclass, astuple
 from unittest import TestCase, TestSuite, TextTestResult, TextTestRunner, defaultTestLoader
 import json
 import sys
+import re
+
+TEST_NAME_PATTERN = re.compile('^.*>test_?', re.UNICODE)
 
 class GradingException(Exception): pass
 
@@ -71,7 +74,9 @@ class AccessTestSuite(TestSuite):
             sys.exit(1)
         awarded_points = (awarded_weight / max_weight) * self.max_points
         grading_results = {"points": awarded_points,
-                           "hints": failure_hints + error_hints}
+                           "hints": failure_hints + error_hints,
+                           "tests": [TEST_NAME_PATTERN.sub('', n).replace("_", " ")
+                                     for n in self.test_names]}
         with open('grade_results.json', 'w') as grade_results_file:
             json.dump(grading_results, grade_results_file)
 
