@@ -56,6 +56,7 @@ class AccessTestSuite(TestSuite):
         awarded_weight = 0
         # We prioritize failure hints, because they are more useful.
         failure_hints = []
+        testScores = []
         error_hints = []
         missing = []
         for test_name in self.test_names:
@@ -63,6 +64,7 @@ class AccessTestSuite(TestSuite):
             if hint == MISSING_HINT:
                 missing.append(test_name)
             max_weight += weight
+            testScores.append(weight if isSuccess else 0)
             if isSuccess:
                 awarded_weight += weight
             if isError:
@@ -76,7 +78,8 @@ class AccessTestSuite(TestSuite):
         grading_results = {"points": awarded_points,
                            "hints": failure_hints + error_hints,
                            "tests": [TEST_NAME_PATTERN.sub('', n).replace("_", " ")
-                                     for n in self.test_names]}
+                                     for n in self.test_names],
+                           "testScores":testScores}
         with open('grade_results.json', 'w') as grade_results_file:
             json.dump(grading_results, grade_results_file)
 
