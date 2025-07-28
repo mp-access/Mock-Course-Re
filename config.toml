@@ -25,22 +25,22 @@ logo = "python.svg"
 # registered students
 [visibility]
 default = "hidden"
-override = "registered"
+override = "public"
 override_start = 2023-01-01T13:00:00
 # if the end date is unspecified, the override applies indefinitely
-override_end = 2028-01-01T13:00:00
+override_end = 2038-01-01T13:00:00
 
 # Information for at least one language must be specified.
 [information.en]
-title = "ACCESS Mock Course"
-description = "This course demonstrates how to define ACCESS courses, assignments and tasks."
+title = "Public ACCESS Mock Course"
+description = "Public mock course (accessible without prior registration)"
 university = "University of Zurich"
 period = "Spring Semester 2023"
 
 # Additional languages
 [information.de]
-title = "ACCESS Demo-Kurs"
-description = "Dieser Kurs demonstriert, wie man ACCESS-Kurse, -Übungen und -Aufgaben definiert."
+title = "Public ACCESS Demo-Kurs"
+description = "Öffentlicher Mock-Kurs (ohne vorherige Registrierung zugänglich)"
 university = "Universität Zürich"
 period = "Frühlings-Semester 2023"
 
