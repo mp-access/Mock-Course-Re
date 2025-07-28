@@ -1,0 +1,26 @@
+slug = "shirt-size"
+
+refill = 7200 # 2 hours
+
+[information.en]
+title = "T-Shirt Size Calculator"
+instructions_file = "instructions_en.md"
+
+[evaluator]
+docker_image = "python:latest"
+grade_command = "python -m grading.tests"
+
+[files]
+visible = [
+  "task/script.py",
+]
+editable = [
+  "task/script.py",
+]
+grading = [
+  "grading/tests.py",
+]
+solution = [
+  "solution/script.py",
+]
+
