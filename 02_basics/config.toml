@@ -8,7 +8,6 @@ slug = "basics"
 # After the end date, users will be able to see the assignment and run code, but they may not submit solutions.
 # They will also see files marked as "solution" in individual tasks.
 start = 2023-01-01T13:00:00
-end = 2028-01-01T13:00:00
 
 # Mandatory. List of directory paths containing the tasks.
 # ACCESS will show tasks in the order in which they are listed here.
