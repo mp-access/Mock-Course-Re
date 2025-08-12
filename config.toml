@@ -12,7 +12,8 @@ logo = "python.svg"
 "assignments" = [
   "01_intro",
   "02_basics",
-  "03_classes"
+  "03_classes",
+  "04_llm",
 ]
 
 # Mandatory. Determines who can see the course in ACCESS at any given time.
