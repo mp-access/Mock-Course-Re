@@ -9,11 +9,11 @@ how that works.
 
 ## Overview
 
-ACCESS uses a simple content hierarchy. ACCESS can serve any number of courses
-and each course is managed through a Git repository, such as this one. A course
-contains assignments and an assignment contains tasks. Courses, assignments and
-tasks are configured through `config.toml` files in their respective root
-directories.
+ACCESS courses are represented using simple files and folders. ACCESS can serve
+any number of courses and each course is managed through a Git repository, such
+as this one. A course contains assignments and an assignment contains tasks.
+Courses, assignments and tasks are configured through `config.toml` files in
+their respective root directories.
 
 ## Unique identification of assignments and tasks
 
@@ -49,7 +49,7 @@ what is going on.
 ## Command execution
 
 Tasks in ACCESS must specify at least a `run_command` and a `grade_command`,
-used to run and grade the student's code in ACCESS, respectively.  An optional
+used to run and grade the student's code in ACCESS, respectively. An optional
 `test_command` may be provided if a student may write their own tests.
 
 When ACCESS executes a command, it will copy all visible files specified under
@@ -78,17 +78,17 @@ student should get, plus a list of hints:
 
 At the moment, ACCESS will only show the first hint provided, but this may
 become configurable in the future. For this reason, it's important that the
-hints are sorted from highest-to-lowest priority. In other words, the student
-will not find it very useful to receive an obscure error message caused by a
-test that checks a very specific edge-case of the requirements. Rather, the
-student should receive the most general hints first.
+hints in `grade_result.json` are sorted from highest to lowest priority. In
+other words, the student will not find it very useful to receive an obscure
+error message caused by a test that checks a very specific edge-case of the
+requirements. Rather, the student should receive the most general hint first.
 
 ## Grading considerations
 
-Grading in ACCESS is note quite the same as regular unit testing for the
+Grading in ACCESS is not quite the same as regular unit testing for the
 following reasons:
 
- * The student's submission could be literally anything, so we cannot expect that even basic things like importing or parsing the solution will succeed. Thus, it is important to catch all such errors and provide appropriate hints, rather than just crashing. For Python, the provided [test harness](universal/harness.py) - see [README](universal/README.md) - takes care of many of these problems.
+ * The student's submission could be literally anything, so one cannot expect that even basic things like importing or parsing the solution will succeed. Thus, it is important to catch all such errors and provide appropriate hints, rather than just crashing. For Python, the provided [test harness](universal/harness.py) - see [README](universal/README.md) - takes care of many of these problems.
  * It might make sense to write much more basic tests than one would in normal programming. For example, rather than just checking whether a function returns the correct number, it might make sense to even check whether it returns a number at all, and give the student a corresponding hint if it does not.
 
 ## i18n
@@ -104,13 +104,13 @@ See its README.md for more information.
 To validate this course or any of its assignments and tasks using `access-cli`, on Linux or Mac, run:
 
 ```
-access-cli -AGs "cp -R solution/* task/"
+access-cli -As "cp -R solution/* task/" -D
 ```
 
 On Windows, run:
 
 ```
-access-cli -AGs "xcopy solution\* task\ /E /I /Y" -v
+access-cli -As "xcopy solution\* task\ /E /I /Y" -v
 ```
 
 Add `-v` for verbose output. The `-s` flag tells access-cli how to "solve" a task. For this repo, it means copying over the sample solution to the task directory.
