@@ -140,10 +140,46 @@ cases have higher priority.
 Finally, any hint caused by a test *error* rather than a test *failure* will receive
 lower overall priority.
 
+### Tests should FAIL, not ERROR
+
 As much as possible, we want to write grading tests that result in a test
 **failure** rather than an error. If your grading test errors given a student
 solution, the test should be augmented with additional checks to result in a
-failure instead.
+failure instead. Here is an example for a test that *could* error:
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not positive")
+        self.assertGreater(implementation.x, 0)
+```
+
+In case the student wrote faulty code where `implementation.x` is, for example,
+a string, `assertGreater` will error, because '>' not supported between
+instances of 'str' and 'int'. So instead of failing, this test case would error.
+Thus, the test suite should check if `x` is a number before checking its value.
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not a number")
+        self.assertIsInstance(implementation.x, numbers.Number)
+        self.hint("x is not positive")
+        self.assertGreater(implementation.x, 0)
+```
+
+or more broadly:
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not a positive number")
+        try:
+            self.assertGreater(implementation.x, 0)
+        except:
+            self.fail()
+```
+
+It often makes sense to implement such checks in a separate (non-test) method
+and to call that method in every test case. You may similarily be able to use
+`setUp()`, but if you do, make sure you call `super().setUp()` inside it.
 
 ## Input function
 
