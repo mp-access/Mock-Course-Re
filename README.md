@@ -9,9 +9,9 @@ how that works.
 
 ## Overview
 
-ACCESS courses are represented using simple files and folders. ACCESS can serve
-any number of courses and each course is managed through a Git repository, such
-as this one. A course contains assignments and an assignment contains tasks.
+ACCESS uses files and folders to represent a course. ACCESS can serve any
+number of courses and each course is managed through a Git repository, such as
+this one. A course contains assignments and an assignment contains tasks.
 Courses, assignments and tasks are configured through `config.toml` files in
 their respective root directories.
 
@@ -39,18 +39,18 @@ references in `config.toml` and as long as you do not change any slugs.
 
 ## Configuration files
 
-Three `config.toml` files in this repository contain in-depth commentary on
-what is going on.
+Study the following three `config.toml` files in this repository for in-depth
+commentary on what is going on.
 
  * Course [config.toml](config.toml)
- * First assignment [config.toml](01_intro/config.toml)
- * First task of first assignment [config.toml](01_intro/hello_world/config.toml)
+ * Assignment [config.toml](01_intro/config.toml)
+ * Task [config.toml](02_basics/persistent_results/config.toml)
 
 ## Command execution
 
-Tasks in ACCESS must specify at least a `run_command` and a `grade_command`,
-used to run and grade the student's code in ACCESS, respectively. An optional
-`test_command` may be provided if a student may write their own tests.
+Tasks in ACCESS must specify at least a `grade_command`, used to grade the
+student's code in ACCESS. Optional `run_command` and `test_command`s may be
+provided if a student may simply run their code or write their own tests.
 
 When ACCESS executes a command, it will copy all visible files specified under
 `[files]` into a docker container (and also the `grading` files if running
@@ -73,8 +73,14 @@ needs to conform to the following example, indicating how many points the
 student should get, plus a list of hints:
 
 ```
-{"points": 0.0, "hints": ["The output is not 'Hello, World!'"]}
+{"points": 0.5, "hints": [null, "The return value is not 'Hello, World!'"]}
 ```
+
+The number of hints should correspond to the number of test cases. Test cases
+that pass will have a null hint, tests that fail should provide a message
+explaining the error. In the example above, two tests were executed and the
+first test passed while the second failed, hence a hint was provided and 0.5
+points (out of 1, presumably) were awarded.
 
 At the moment, ACCESS will only show the first hint provided, but this may
 become configurable in the future. For this reason, it's important that the
@@ -104,13 +110,13 @@ See its README.md for more information.
 To validate this course or any of its assignments and tasks using `access-cli`, on Linux or Mac, run:
 
 ```
-access-cli -As "cp -R solution/* task/" -D
+access-cli -As "cp -R solution/* task/"
 ```
 
 On Windows, run:
 
 ```
-access-cli -As "xcopy solution\* task\ /E /I /Y" -v
+access-cli -As "xcopy solution\* task\ /E /I /Y"
 ```
 
 Add `-v` for verbose output. The `-s` flag tells access-cli how to "solve" a task. For this repo, it means copying over the sample solution to the task directory.

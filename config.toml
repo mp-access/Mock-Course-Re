@@ -20,14 +20,14 @@ logo = "python.svg"
 #   "hidden": only administrators can see the course.
 #   "registered": only users registered for the course can enter it.
 #   "public": anyone can enter the course and solve exercises.
+[visibility]
+default = "hidden"
 # The (optional) override specifies a scheduled change in visibility.
 # In this example, the course is hidden by default but becomes visible for
 # registered students
-[visibility]
-default = "hidden"
 override = "registered"
 override_start = 2023-01-01T13:00:00
-# if the end date is unspecified, the override applies indefinitely
+# If the end date is unspecified, the override applies indefinitely
 override_end = 2028-01-01T13:00:00
 
 # Information for at least one language must be specified.
