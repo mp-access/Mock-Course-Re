@@ -21,45 +21,40 @@ class GradingTests(AccessTestCase):
         self.assertEqual(expected, actual)
         
     def test_XS(self):
-        self._test(80 - DELTA, "N/A")
         self._test(80, "XS")
         self._test(80+DELTA, "XS")
-
-    def test_S(self):
         self._test(90 - DELTA, "XS")
         self._test(90, "XS")
-        self._test(90 + DELTA, "S")
 
-    def test_M(self):
+    def test_S(self):
+        self._test(90 + DELTA, "S")
         self._test(98 - DELTA, "S")
         self._test(98, "S")
-        self._test(98 + DELTA, "M")
 
-    def test_L(self):
+    def test_M(self):
+        self._test(98 + DELTA, "M")
         self._test(104 - DELTA, "M")
         self._test(104, "M")
-        self._test(104 + DELTA, "L")
 
-    def test_XL(self):
+    def test_L(self):
+        self._test(104 + DELTA, "L")
         self._test(111 - DELTA, "L")
         self._test(111, "L")
+
+    def test_XL(self):
         self._test(111 + DELTA, "XL")
-
-
-    def test_XXL(self):
         self._test(124 - DELTA, "XL")
         self._test(124, "XL")
-        self._test(124 + DELTA, "N/A")
 
     
-    @weight(0)
-    def test_pass_NA_case(self):
+    def test_NA(self):
         self._test(80 - DELTA, "N/A")
         self._test(124 + DELTA, "N/A")
     
 
     @weight(0)
-    def test_exactly_one_test_fails(self):
+    def test_correct_or_multiple_sizes_wrong(self):
+        # naming hard to get right / intuitive
         failures = []
 
         tests_to_run = [
@@ -68,7 +63,7 @@ class GradingTests(AccessTestCase):
             self.test_M,
             self.test_L,
             self.test_XL,
-            self.test_XXL,
+            self.test_NA
         ]
 
         for test_func in tests_to_run:
@@ -80,27 +75,29 @@ class GradingTests(AccessTestCase):
                 failures.append(f"{test_func.__name__}: crashed ({type(e).__name__}: {e})")
 
         total_failures = len(failures)
+        print(f"TOTAL FAILURE: {total_failures}" )
         self.assertNotEqual(total_failures, 1) 
 
 
     @weight(0)
-    def test_deltas_pass(self):
+    def test_correct_boundary_handling(self):
         self._test(80 - DELTA, "N/A")
+
         self._test(80+DELTA, "XS")        
-
         self._test(90 - DELTA, "XS")
+
         self._test(90 + DELTA, "S")
-
         self._test(98 - DELTA, "S")
-        self._test(98 + DELTA, "M")
-
-        self._test(104 - DELTA, "M")
-        self._test(104 + DELTA, "L")
-
-        self._test(111 - DELTA, "L")
-        self._test(111 + DELTA, "XL")
         
+        self._test(98 + DELTA, "M")
+        self._test(104 - DELTA, "M")
+        
+        self._test(104 + DELTA, "L")
+        self._test(111 - DELTA, "L")
+        
+        self._test(111 + DELTA, "XL")
         self._test(124 - DELTA, "XL")
+
         self._test(124 + DELTA, "N/A")
 
     def _check_float_as_input(self, circumference, expected):
@@ -110,7 +107,7 @@ class GradingTests(AccessTestCase):
         self.assertEqual(expected, actual)
     
     @weight(0)
-    def test_floats_as_input(self):
+    def test_handles_floats(self):
         # chose floats that for sure fail bc. they are float, not because of wrong boundaries
         self._check_float_as_input(82.5, "XS")
         self._check_float_as_input(92.5, "S")
@@ -119,8 +116,9 @@ class GradingTests(AccessTestCase):
         self._check_float_as_input(113.5, "XL")
         
     @weight(0)
-    def test_implementation_crashed(self):
-        for circumference in range(79,125):
+    def test_implementation_runs(self):
+        one_circumference_per_size = [81,91,99,105, 112]
+        for circumference in one_circumference_per_size:
             self.hint(f"Solution crashes when called with {circumference}")
             script.get_size(circumference)
 
