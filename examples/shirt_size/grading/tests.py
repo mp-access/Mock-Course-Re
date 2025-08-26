@@ -80,11 +80,7 @@ class GradingTests(AccessTestCase):
                 failures.append(f"{test_func.__name__}: crashed ({type(e).__name__}: {e})")
 
         total_failures = len(failures)
-
-        if total_failures == 1:
-            self.fail(self.hint(
-                f"Exactly one test failed: {failures[0]}"
-            ))
+        self.assertNotEqual(total_failures, 1) 
 
 
     @weight(0)
