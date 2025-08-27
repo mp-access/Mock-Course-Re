@@ -14,9 +14,15 @@ DELTA = 0.0001
 
 class GradingTests(AccessTestCase):
 
+    def _call(self, circumference):
+        try:
+            return script.get_size(circumference)
+        except:
+            self.hint(f"Solution crashes when called with {circumference}")
+            self.fail()
+ 
     def _test(self, circumference, expected):
-        self.hint(f"Solution crashes when called with {circumference}")
-        actual = script.get_size(circumference)
+        actual = self._call(circumference)
         self.hint(f"Your determined size {actual} for a circumference of {circumference} is not correct! The correct size is: {expected}.")
         self.assertEqual(expected, actual)
         
@@ -101,8 +107,7 @@ class GradingTests(AccessTestCase):
         self._test(124 + DELTA, "N/A")
 
     def _check_float_as_input(self, circumference, expected):
-        self.hint(f"Solution crashes when called with {circumference}")
-        actual = script.get_size(circumference)
+        actual = self._call(circumference)
         self.hint(f"Your solution doesn't work for floating point numbers. Your determined size {actual} for a circumference of {circumference} is not correct! The correct size is: {expected}. Are you perhaps using the range() function? ")
         self.assertEqual(expected, actual)
     
@@ -119,7 +124,6 @@ class GradingTests(AccessTestCase):
     def test_implementation_runs(self):
         one_circumference_per_size = [81,91,99,105, 112]
         for circumference in one_circumference_per_size:
-            self.hint(f"Solution crashes when called with {circumference}")
-            script.get_size(circumference)
+            self._call(circumference)
 
 TestRunner().run(AccessTestSuite(1, [GradingTests]))
