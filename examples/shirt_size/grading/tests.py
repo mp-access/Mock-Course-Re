@@ -54,18 +54,11 @@ class GradingTests(AccessTestCase):
 
     @weight(2)
     def test_floats(self):
-        self.assertShirtSizeFloat(80 + DELTA, "XS")
-        self.assertShirtSizeFloat(90 - DELTA, "XS")
-        self.assertShirtSizeFloat(90 + DELTA, "S")
-        self.assertShirtSizeFloat(98 - DELTA, "S")
-        self.assertShirtSizeFloat(98 + DELTA, "M")
-        self.assertShirtSizeFloat(104 - DELTA, "M")
-        self.assertShirtSizeFloat(104 + DELTA, "L")
-        self.assertShirtSizeFloat(111 - DELTA, "L")
-        self.assertShirtSizeFloat(111 + DELTA, "XL")
-        self.assertShirtSizeFloat(124 - DELTA, "XL")
-        self.assertShirtSizeFloat(80 - DELTA, "N/A")
-        self.assertShirtSizeFloat(124 + DELTA, "N/A")
+        self.assertShirtSizeFloat(82.5, "XS")
+        self.assertShirtSizeFloat(92.5, "S")
+        self.assertShirtSizeFloat(100.5, "M")
+        self.assertShirtSizeFloat(106.5, "L")
+        self.assertShirtSizeFloat(113.5, "XL")
 
     @weight(0)
     def test_symptom_one_edge_case_missing(self):
@@ -114,14 +107,7 @@ class GradingTests(AccessTestCase):
         self.assertShirtSize(124 + DELTA, "N/A")
 
    
-    @weight(0)
-    def test_handles_floats(self):
-        # choose floats that for sure fail bc. they are float, not because of wrong boundaries
-        self.assertShirtSizeFloat(82.5, "XS")
-        self.assertShirtSizeFloat(92.5, "S")
-        self.assertShirtSizeFloat(100.5, "M")
-        self.assertShirtSizeFloat(106.5, "L")
-        self.assertShirtSizeFloat(113.5, "XL")
+
         
     @weight(0)
     def test_implementation_runs(self):
