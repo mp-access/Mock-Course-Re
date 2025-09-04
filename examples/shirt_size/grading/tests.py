@@ -32,6 +32,9 @@ class GradingTests(AccessTestCase):
         self.hint(f"Your solution returns {actual} for a circumference of {circumference}{suffix} The correct size is: {expected}")
         self.assertEqual(expected, actual)
  
+    def test_NA_too_small(self):
+        self.assertShirtSize(80 - 1, "N/A")
+
     def test_XS(self):
         self.assertShirtSize(80, "XS")
         self.assertShirtSize(90, "XS")
@@ -48,8 +51,7 @@ class GradingTests(AccessTestCase):
     def test_XL(self):
         self.assertShirtSize(124, "XL")
 
-    def test_NA(self):
-        self.assertShirtSize(80 - 1, "N/A")
+    def test_NA_too_large(self):
         self.assertShirtSize(124 + 1, "N/A")
 
     @weight(2)
@@ -71,7 +73,8 @@ class GradingTests(AccessTestCase):
             self.test_M,
             self.test_L,
             self.test_XL,
-            self.test_NA
+            self.test_NA_too_small,
+            self.test_NA_too_large,
         ]
 
         for test_func in tests_to_run:
