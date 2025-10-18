@@ -8,7 +8,7 @@ the grading tests to be written slightly differently.
 ## General approach
 
 See [this grading test suite](../02_basics/variable_assignment/grading/tests.py) for a
-simple example and see the following sections for more details.
+simple example and review the following sections for more details.
 
 ### Boilerplate
 
@@ -104,11 +104,10 @@ Correspondingly, the `grade_command` in `config.toml` should always be
 grade_command = "python -m grading.tests"
 ```
 
-Note that an AccessTestSuite can contain multiple TestCases, and the order of
-hints provided corresponds to the order of TestCases.
+Note that an `AccessTestSuite` can contain multiple `AccessTestCase`s, and the order of
+hints provided corresponds to the order of test classes in the suite.
 
-Or, instead of running the grading locally in your environment, use access-cli
-as explained in the main README.
+Finally, use access-cli to validate the task as explained in the main README.
 
 ### Weights and points
 
@@ -125,7 +124,7 @@ use cases for this are
    completed to achieve full points, you can also set a weight of 0.
  * If a test is more important, it could have a higher weight than 1.
 
-When all tests have been executed (via TestRunner), the harness will calculate
+When all tests have been executed (via `TestRunner`), the harness will calculate
 the correct number of points to award based on the `max_points` defined in
 `config.toml` (i.e. `(weights_awarded / weights_achievable) * max_points)`)
 
@@ -141,14 +140,50 @@ cases have higher priority.
 Finally, any hint caused by a test *error* rather than a test *failure* will receive
 lower overall priority.
 
+### Tests should FAIL, not ERROR
+
 As much as possible, we want to write grading tests that result in a test
 **failure** rather than an error. If your grading test errors given a student
 solution, the test should be augmented with additional checks to result in a
-failure instead.
+failure instead. Here is an example for a test that *could* error:
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not positive")
+        self.assertGreater(implementation.x, 0)
+```
+
+In case the student wrote faulty code where `implementation.x` is, for example,
+a string, `assertGreater` will error, because '>' not supported between
+instances of 'str' and 'int'. So instead of failing, this test case would error.
+Thus, the test suite should check if `x` is a number before checking its value.
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not a number")
+        self.assertIsInstance(implementation.x, numbers.Number)
+        self.hint("x is not positive")
+        self.assertGreater(implementation.x, 0)
+```
+
+or more broadly:
+
+```
+    def test_x_is_positive(self):
+        self.hint("x is not a positive number")
+        try:
+            self.assertGreater(implementation.x, 0)
+        except:
+            self.fail()
+```
+
+It often makes sense to implement such checks in a separate (non-test) method
+and to call that method in every test case. You may similarily be able to use
+`setUp()`, but if you do, make sure you call `super().setUp()` inside it.
 
 ## Input function
 
-The harness will replace builtins.input with an implementation that always
+The harness replaces builtins.input with an implementation that always
 fails. If a student uses `input()`, they will receive a hint that this is
 forbidden.
 

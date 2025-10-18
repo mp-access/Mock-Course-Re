@@ -7,9 +7,9 @@ slug = "hello"
 
 # Mandatory.
 # Assignments will be invisible to regular users until the start date.
-# Users will be able to submit solutions between the start and end date.
-# After the end date, users will be able to see the assignment and run code, but they may not submit solutions.
-# They will also see files marked as "solution" in individual tasks.
+# Users will be able to submit solutions after the start date.
+# After the end date, students can continue submitting, but the points won't count,
+# and they will also see files marked as "solution" in individual tasks.
 start = 2020-01-01T13:00:00
 end = 2020-01-12T13:00:00
 

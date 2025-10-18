@@ -1,35 +1,49 @@
+# Mandatory. This slug will be used for the URL of task.
 slug = "presistent-results"
 
+# Mandatory. How many times the student may attempt a submission
 max_attempts = 2
+# Optional. After this many seconds, the student is granted one more attempt (up to max_attempts)
 refill = 86400 # 24 hours
+# Mandatory. Number of points for a correct solution
 max_points = 1
 
+# Mandatory. Basic information (.en is required, other languages can be added)
 [information.en]
 title = "Persistent Results"
 instructions_file = "instructions_en.md"
 
 [evaluator]
+# Mandatory. Docker image to use for running student code (will be pulled from DockerHub)
 docker_image = "python:latest"
+# Commands run when clicking run/test/submit
+# grade_command is mandatory, the other two are optional
 run_command = "python task/script.py"
 test_command = "python -m unittest discover -v task"
 grade_command = "python -m grading.tests"
 
+# Mandatory. Specifies which files are involved in this task.
 [files]
+# Files visible to the student
 visible = [
   "task/script.py",
   "task/ball.png",
   "task/tests.py",
 ]
+# Files that can be edited by the student
 editable = [
   "task/script.py",
   "task/tests.py",
 ]
+# Files needed for grading (i.e., used by grade_command)
 grading = [
   "grading/tests.py",
 ]
+# Sample solution (released after the deadline passes)
 solution = [
   "solution/script.py",
 ]
+# Optional list of files that should be saved from the docker container
 persist = [
   "out/data.csv",
   "ball.png",
