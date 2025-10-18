@@ -3,6 +3,7 @@ start = 2028-01-01T13:00:00
 end = 2028-01-13T13:00:00
 "tasks" = [
   "carpark_multiple_inheritance",
+  "impure_functions",
 ]
 [information.en]
 title = "Classes"
