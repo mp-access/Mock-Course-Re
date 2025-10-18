@@ -1,0 +1,27 @@
+slug = "polymorphism"
+
+refill = 7200 # 2 hours
+
+[information.en]
+title = "Polymorphism"
+instructions_file = "instructions_en.md"
+
+[evaluator]
+docker_image = "python:latest"
+run_command = "python task/script.py"
+grade_command = "python -m grading.tests"
+
+[files]
+visible = [
+  "task/script.py"
+]
+editable = [
+  "task/script.py",
+]
+grading = [
+  "grading/tests.py",
+]
+solution = [
+  "solution/script.py",
+]
+

@@ -25,6 +25,7 @@ logo = "python.svg"
   "examples/pass_by_reference",
   "examples/circle_square_rect",
   "examples/shirt_size",
+  "examples/polymorphism",
 ]
 
 # Mandatory. Determines who can see the course in ACCESS at any given time.
