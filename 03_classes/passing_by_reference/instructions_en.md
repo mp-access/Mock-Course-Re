@@ -67,3 +67,26 @@ That’s why it’s better practice to **pass data in as a parameter** (and to a
 
 # **Exercise**
 Write  a function called `add_suffix` that takes two arguments: a list of strings (`words`) and a string (`suffix`). Your function should append the `suffix` to each word in the list, modifying the list in place. Since your function modifies the list in place it should not return anything.
+
+
+# To test markdown feature
+
+This is an example of an ```output annotation:
+
+```output 
+# what happens with this comment? 
+[1,25,34,21]
+```
+
+This is an exmaple for an ```warning annotation:
+
+```warning
+If you don't define a base case, this recursion will enter an endless loop. 
+```
+
+This is an example where no annotation is provided
+
+```
+[1,2,3]
+print("hello world)
+```
