@@ -1,0 +1,30 @@
+slug = "passing_by_reference"
+
+max_attempts = 3
+refill = 86400 # 24 hours
+max_points = 1
+
+[information.en]
+title = "Passing by Reference"
+instructions_file = "instructions_en.md"
+
+[evaluator]
+docker_image = "python:latest"
+run_command = "python task/script.py"
+grade_command = "python -m grading.tests"
+
+[files]
+visible = [
+  "task/script.py",
+  "resource/ref_07.png",
+]
+editable = [
+  "task/script.py",
+]
+grading = [
+  "grading/tests.py",
+]
+solution = [
+  "solution/script.py",
+]
+

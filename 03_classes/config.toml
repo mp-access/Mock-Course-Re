@@ -4,6 +4,7 @@ end = 2028-01-13T13:00:00
 "tasks" = [
   "carpark_multiple_inheritance",
   "impure_functions",
+  "passing_by_reference",
 ]
 [information.en]
 title = "Classes"
