@@ -84,6 +84,14 @@ This is an exmaple for an ```warning annotation:
 If you don't define a base case, this recursion will enter an endless loop. 
 ```
 
+This is an example for a ```plain annotation
+
+```plain
+[1,2,3]
+print("hello world)
+```
+
+
 This is an example where no annotation is provided
 
 ```
