@@ -154,8 +154,9 @@ failure instead. Here is an example for a test that *could* error:
 ```
 
 In case the student wrote faulty code where `implementation.x` is, for example,
-a string, `assertGreater` will error, because '>' not supported between
-instances of 'str' and 'int'. So instead of failing, this test case would error.
+a string, `assertGreater` will give a `TypeError`, because `assertGreater` uses
+'>', which is not supported between instances of 'str' and 'int': [Python source code](https://github.com/python/cpython/blob/05679f3576ed3298c9b0f86e8a3462f0b92dff8f/Lib/unittest/case.py#L1331).
+So instead of failing, this test case would give a cryptic error.
 Thus, the test suite should check if `x` is a number before checking its value.
 
 ```
